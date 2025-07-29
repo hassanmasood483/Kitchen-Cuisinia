@@ -1,0 +1,110 @@
+.header {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding-top: 0;
+  background: url(../assets/header.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+.header-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+  max-width: 800px;
+  padding: 0 2rem;
+  z-index: 2;
+  animation: fadeIn 3s;
+}
+
+.header-content h1 {
+  font-weight: 600;
+  color: white;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 0;
+}
+
+.header-content p {
+  color: white;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.header-content button {
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 1rem 2.5rem;
+  background-color: var(--primary-color);
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin-top: 1rem;
+}
+
+.header-content button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  background-color: #2d3553;
+}
+
+/* Responsive Site */
+
+@media (max-width: 1050px) {
+  .header-content {
+    max-width: 90%;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 750px) {
+  .header-content {
+    max-width: 95%;
+    padding: 0 1rem;
+  }
+  .header-content p {
+    display: block;
+  }
+  .header-content button {
+    padding: 0.8rem 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-content h1 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+  }
+  .header-content p {
+    font-size: clamp(0.9rem, 1.2vw, 1rem);
+  }
+}

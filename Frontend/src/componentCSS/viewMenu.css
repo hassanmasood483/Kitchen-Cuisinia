@@ -1,0 +1,252 @@
+.viewMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.viewMenu h1 {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.viewMenuText {
+  color: var(--primary-color);
+  max-width: 62%;
+}
+
+.viewMenuList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  text-align: center;
+  margin: 20px 0px;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+}
+
+.viewMenuList::-webkit-scrollbar {
+  display: none;
+}
+
+.menuListItem img {
+  width: 7.5vw;
+  min-width: 80px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.menuListItem p {
+  margin-top: 10px;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: 1s;
+}
+
+.viewMenu hr {
+  margin: 10px 0px;
+  height: 2px;
+  background-color: var(--primary-color);
+  border: none;
+}
+
+.menuListItem .active {
+  border: 3px solid tomato;
+  border-radius: 50%;
+  transition: none;
+  padding: 2px;
+}
+
+/* Responsive Site */
+
+@media (max-width: 1050px) {
+  .viewMenuText {
+    max-width: 100%;
+    font-size: 14px;
+  }
+}
+
+.menu-glass-bg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: calc(100vh - 160px);
+  width: 100%;
+  max-width: 1200px;
+  margin: 60px auto 60px auto;
+  padding: 0 20px 60px 20px;
+  background: #f8f9fa;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.menu-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #222;
+  text-align: center;
+}
+
+.menu-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.menu-card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 1rem;
+  margin-bottom: 2rem;
+}
+
+.menu-card-glass {
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  min-width: 220px;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin: 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.menu-card-glass:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.menu-card-img-wrap {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+}
+
+.menu-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.menu-card-img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.menu-card-content {
+  text-align: center;
+  width: 100%;
+}
+
+.menu-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #222;
+  text-transform: capitalize;
+}
+
+.menu-card-desc {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+@media (max-width: 800px) {
+  .menu-glass-bg {
+    padding: 2rem 15px 60px 15px;
+  }
+  
+  .menu-card-list {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
+  
+  .menu-card-glass {
+    min-width: 180px;
+    max-width: 220px;
+    padding: 1.5rem 1rem 1rem 1rem;
+  }
+  
+  .menu-card-img-wrap {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .menu-card-img-placeholder {
+    font-size: 1.5rem;
+  }
+  
+  .menu-title {
+    font-size: 2rem;
+  }
+  
+  .menu-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .menu-glass-bg {
+    padding: 2rem 10px 60px 10px;
+  }
+  
+  .menu-card-list {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+  
+  .menu-card-glass {
+    min-width: 150px;
+    max-width: 180px;
+    padding: 1.2rem 0.8rem 0.8rem 0.8rem;
+  }
+  
+  .menu-card-img-wrap {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .menu-card-img-placeholder {
+    font-size: 1.2rem;
+  }
+  
+  .menu-card-title {
+    font-size: 1rem;
+  }
+  
+  .menu-card-desc {
+    font-size: 0.8rem;
+  }
+}

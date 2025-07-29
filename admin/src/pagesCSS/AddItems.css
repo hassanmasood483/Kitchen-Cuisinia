@@ -1,0 +1,67 @@
+.add {
+  width: 70%;
+  margin-left: max(5vw, 25px);
+  margin-top: 50px;
+  font-size: 16px;
+  color: var(--primary-color);
+}
+
+.add form {
+  gap: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.img-upload img {
+  width: 120px;
+  cursor: pointer;
+}
+
+.product-name,
+.product-description {
+  width: max(40%, 280px);
+  outline: none;
+}
+
+.product-name input {
+  border-radius: 100px;
+}
+
+.product-description textarea {
+  border-radius: 20px;
+}
+
+.product-name input,
+.product-description textarea {
+  padding: 10px;
+  border: 1px solid var(--primary-color);
+}
+
+.category-price {
+  display: flex;
+  gap: 30px;
+  border-radius: 10px;
+}
+
+.category-price select,
+.category-price input {
+  max-width: 120px;
+  padding: 5px;
+  cursor: pointer;
+  border: 1px solid var(--primary-color);
+  border-radius: 50px;
+}
+
+.button {
+  max-width: 120px;
+  border: none;
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+}
