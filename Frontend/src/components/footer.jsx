@@ -17,10 +17,10 @@ const Footer = () => {
               <img src={assets.facebook_icon} alt="facebook" />
               <img src={assets.twitter_icon} alt="twitter" />
               <img src={assets.linkedin_icon} alt="linkedIn" />
+              <br />
+              kitchencuisinia23@gmail.com
             </div>
           </div>
-          
-          
         </div>
         <hr />
         <p className="copyright">
