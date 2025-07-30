@@ -14,16 +14,18 @@ import Orders from "./pages/Orders";
 
 const App = () => {
   const { token, loading } = useContext(StoreContext);
-  const [showLogin, setShowLogin] = useState(false);
+  const [showLogin, setShowLogin] = useState(false); // Start with false, will be set based on token
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Show login if no token and not currently loading
-    if (!token && !loading) {
-      setShowLogin(true);
-    } else if (token) {
-      setShowLogin(false);
+    // Only show login if no token and not currently loading
+    if (!loading) {
+      if (!token) {
+        setShowLogin(true);
+      } else {
+        setShowLogin(false);
+      }
     }
   }, [token, loading]);
 
@@ -50,7 +52,9 @@ const App = () => {
   return (
     <>
       {showLogin ? (
-        <LoginPopup setShowLogin={setShowLogin} />
+        <LoginPopup 
+          setShowLogin={setShowLogin} 
+        />
       ) : (
         <div className="app">
           {location.pathname !== "/" && <Navbar setShowLogin={setShowLogin} />}

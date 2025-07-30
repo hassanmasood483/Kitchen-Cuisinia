@@ -1,5 +1,5 @@
 import "../componentCSS/viewMenu.css";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { StoreContext } from "../context/StoreContext";
 import { assets } from "../assets/assets";
@@ -7,21 +7,10 @@ import { assets } from "../assets/assets";
 const ViewMenu = () => {
   const navigate = useNavigate();
   const { food_list, refreshFoodList, loading } = useContext(StoreContext);
-  const [menuLoading, setMenuLoading] = useState(true);
 
   // Refresh food list when component mounts
   useEffect(() => {
-    const loadMenu = async () => {
-      setMenuLoading(true);
-      try {
-        await refreshFoodList();
-      } catch (error) {
-        console.error("Error loading menu:", error);
-      } finally {
-        setMenuLoading(false);
-      }
-    };
-    loadMenu();
+    refreshFoodList();
   }, [refreshFoodList]);
 
   // Get unique categories from food_list
@@ -57,7 +46,7 @@ const ViewMenu = () => {
   };
 
   // Show loading state
-  if (loading || menuLoading) {
+  if (loading) {
     return (
       <div className="menu-glass-bg">
         <div style={{ 

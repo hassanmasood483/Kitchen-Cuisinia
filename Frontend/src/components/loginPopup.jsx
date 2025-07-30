@@ -6,7 +6,7 @@ import axios from "axios";
 
 const LoginPopup = ({ setShowLogin }) => {
   // It's in context API so we can use it anywhere in application
-  const { url, setToken } = useContext(StoreContext);
+  const { url, loadUserData } = useContext(StoreContext);
 
   const [currentState, setCurrentState] = useState("Sign Up");
   const [data, setData] = useState({
@@ -102,8 +102,7 @@ const LoginPopup = ({ setShowLogin }) => {
       const response = await axios.post(newURL, data);
 
       if (response.data.success) {
-        setToken(response.data.token);
-        localStorage.setItem("token", response.data.token);
+        loadUserData(response.data.token);
         setShowLogin(false);
         console.log(response);
       } else {

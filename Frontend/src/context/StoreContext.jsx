@@ -32,7 +32,18 @@ const StoreContextProvidor = (props) => {
   // Function to refresh food list (can be called when new items are added)
   const refreshFoodList = useCallback(async () => {
     await fetchFoodList();
-  }, []);
+  }, [url]);
+
+  // Function to manually load user data after successful login
+  const loadUserData = async (userToken) => {
+    try {
+      setToken(userToken);
+      localStorage.setItem("token", userToken);
+      await loadCartData(userToken);
+    } catch (error) {
+      console.error("Error loading user data:", error);
+    }
+  };
 
   // we want that when we refresh the page we will not get logged out
   useEffect(() => {
@@ -41,9 +52,12 @@ const StoreContextProvidor = (props) => {
       try {
         //We want that this function runs when web-page is load and data is fetch from database
         await fetchFoodList();
-        if (localStorage.getItem("token")) {
-          setToken(localStorage.getItem("token"));
-          await loadCartData(localStorage.getItem("token")); //we call this function and get the token key with which we only get the data of that user's token
+        
+        // Check if there's a stored token and load user data
+        const storedToken = localStorage.getItem("token");
+        if (storedToken) {
+          setToken(storedToken);
+          await loadCartData(storedToken);
         }
       } catch (error) {
         console.error("Error loading initial data:", error);
@@ -131,6 +145,7 @@ const StoreContextProvidor = (props) => {
     token,
     setToken,
     loading, // <-- Expose loading state
+    loadUserData, // <-- Expose loadUserData function
   };
 
   return (
