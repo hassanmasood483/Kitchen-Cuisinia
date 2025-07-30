@@ -31,35 +31,41 @@ const LoginPopup = ({ setShowLogin }) => {
 
   const validatePassword = (password) => {
     if (!password) return "Password is required";
-    if (password.length < 8) return "Password must be at least 8 characters long";
-    if (!/(?=.*[a-z])/.test(password)) return "Password must contain at least one lowercase letter";
-    if (!/(?=.*[A-Z])/.test(password)) return "Password must contain at least one uppercase letter";
-    if (!/(?=.*\d)/.test(password)) return "Password must contain at least one number";
-    if (!/(?=.*[!@#$%^&*(),.?":{}|<>])/.test(password)) return "Password must contain at least one special character";
+    if (password.length < 8)
+      return "Password must be at least 8 characters long";
+    if (!/(?=.*[a-z])/.test(password))
+      return "Password must contain at least one lowercase letter";
+    if (!/(?=.*[A-Z])/.test(password))
+      return "Password must contain at least one uppercase letter";
+    if (!/(?=.*\d)/.test(password))
+      return "Password must contain at least one number";
+    if (!/(?=.[!@#$%^&(),.?":{}|<>])/.test(password))
+      return "Password must contain at least one special character";
     return "";
   };
 
   const validateName = (name) => {
     if (!name) return "Name is required";
     if (name.length < 2) return "Name must be at least 2 characters long";
-    if (!/^[a-zA-Z\s]+$/.test(name)) return "Name can only contain letters and spaces";
+    if (!/^[a-zA-Z\s]+$/.test(name))
+      return "Name can only contain letters and spaces";
     return "";
   };
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (currentState === "Sign Up") {
       const nameError = validateName(data.name);
       if (nameError) newErrors.name = nameError;
     }
-    
+
     const emailError = validateEmail(data.email);
     if (emailError) newErrors.email = emailError;
-    
+
     const passwordError = validatePassword(data.password);
     if (passwordError) newErrors.password = passwordError;
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -71,12 +77,12 @@ const LoginPopup = ({ setShowLogin }) => {
       ...data,
       [name]: value,
     }));
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: ""
+        [name]: "",
       }));
     }
   };
@@ -84,7 +90,7 @@ const LoginPopup = ({ setShowLogin }) => {
   //Funstion for user Login
   const onLogin = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -109,7 +115,9 @@ const LoginPopup = ({ setShowLogin }) => {
         alert(response.data.message);
       }
     } catch (error) {
-      alert(error.response?.data?.message || "An error occurred. Please try again.");
+      alert(
+        error.response?.data?.message || "An error occurred. Please try again."
+      );
     }
   };
 
@@ -122,7 +130,9 @@ const LoginPopup = ({ setShowLogin }) => {
     }
 
     try {
-      const response = await axios.post(`${url}/user/check-email`, { email: forgotEmail });
+      const response = await axios.post(`${url}/user/check-email`, {
+        email: forgotEmail,
+      });
       if (response.data.success) {
         setResetStep(1);
         setResetError("");
@@ -134,7 +144,8 @@ const LoginPopup = ({ setShowLogin }) => {
     }
   };
 
-  const handleResetPassword = async () => {
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
     const passwordError = validatePassword(data.password);
     if (passwordError) {
       setResetError(passwordError);
@@ -144,9 +155,9 @@ const LoginPopup = ({ setShowLogin }) => {
     try {
       const response = await axios.post(`${url}/user/reset-password`, {
         email: forgotEmail,
-        password: data.password
+        password: data.password,
       });
-      
+
       if (response.data.success) {
         setResetSuccess("Password updated successfully!");
         setResetError("");
@@ -168,7 +179,16 @@ const LoginPopup = ({ setShowLogin }) => {
   return (
     <>
       <div className="login-popup">
-        <form onSubmit={forgotMode ? (resetStep === 0 ? handleForgotPassword : handleResetPassword) : onLogin} className="login-container">
+        <form
+          onSubmit={
+            forgotMode
+              ? resetStep === 0
+                ? handleForgotPassword
+                : handleResetPassword
+              : onLogin
+          }
+          className="login-container"
+        >
           <div className="login-title">
             <h2>{forgotMode ? "Forgot Password" : currentState}</h2>
             <img
@@ -183,12 +203,14 @@ const LoginPopup = ({ setShowLogin }) => {
                 <div className="input-group">
                   <input
                     name="forgotEmail"
-                    onChange={e => setForgotEmail(e.target.value)}
+                    onChange={(e) => setForgotEmail(e.target.value)}
                     value={forgotEmail}
                     type="email"
                     placeholder="Enter your email"
                     required
-                    className={resetError && resetError.includes("email") ? "error" : ""}
+                    className={
+                      resetError && resetError.includes("email") ? "error" : ""
+                    }
                   />
                 </div>
               ) : (
@@ -200,7 +222,11 @@ const LoginPopup = ({ setShowLogin }) => {
                     type="password"
                     placeholder="Enter new password"
                     required
-                    className={resetError && resetError.includes("Password") ? "error" : ""}
+                    className={
+                      resetError && resetError.includes("Password")
+                        ? "error"
+                        : ""
+                    }
                   />
                 </div>
               )
@@ -219,7 +245,9 @@ const LoginPopup = ({ setShowLogin }) => {
                       required
                       className={errors.name ? "error" : ""}
                     />
-                    {errors.name && <span className="error-message">{errors.name}</span>}
+                    {errors.name && (
+                      <span className="error-message">{errors.name}</span>
+                    )}
                   </div>
                 )}
                 <div className="input-group">
@@ -232,7 +260,9 @@ const LoginPopup = ({ setShowLogin }) => {
                     required
                     className={errors.email ? "error" : ""}
                   />
-                  {errors.email && <span className="error-message">{errors.email}</span>}
+                  {errors.email && (
+                    <span className="error-message">{errors.email}</span>
+                  )}
                 </div>
                 <div className="input-group">
                   <input
@@ -244,20 +274,28 @@ const LoginPopup = ({ setShowLogin }) => {
                     required
                     className={errors.password ? "error" : ""}
                   />
-                  {errors.password && <span className="error-message">{errors.password}</span>}
+                  {errors.password && (
+                    <span className="error-message">{errors.password}</span>
+                  )}
                 </div>
               </>
             )}
           </div>
           {forgotMode ? (
-            <button type="submit">{resetStep === 0 ? "Check Email" : "Reset Password"}</button>
+            <button type="submit">
+              {resetStep === 0 ? "Check Email" : "Reset Password"}
+            </button>
           ) : (
             <button type="submit">
               {currentState === "Sign Up" ? "Create Account" : "Log In"}
             </button>
           )}
-          {forgotMode && resetError && <p className="error-text">{resetError}</p>}
-          {forgotMode && resetSuccess && <p className="success-text">{resetSuccess}</p>}
+          {forgotMode && resetError && (
+            <p className="error-text">{resetError}</p>
+          )}
+          {forgotMode && resetSuccess && (
+            <p className="success-text">{resetSuccess}</p>
+          )}
           {!forgotMode && (
             <div className="login-condition">
               <input type="checkbox" required />
@@ -278,7 +316,10 @@ const LoginPopup = ({ setShowLogin }) => {
                     if (data.email) {
                       // Immediately check if email exists
                       try {
-                        const response = await axios.post(`${url}/user/check-email`, { email: data.email });
+                        const response = await axios.post(
+                          `${url}/user/check-email`,
+                          { email: data.email }
+                        );
                         if (response.data.exists) {
                           setResetStep(1);
                         } else {
@@ -299,18 +340,30 @@ const LoginPopup = ({ setShowLogin }) => {
                 </span>
               </p>
               <p>
-                Create a new account?{' '}
-                <span onClick={() => setCurrentState("Sign Up")}>Click Here</span>
+                Create a new account?{" "}
+                <span onClick={() => setCurrentState("Sign Up")}>
+                  Click Here
+                </span>
               </p>
             </>
           ) : !forgotMode ? (
             <p>
-              Already have an account?{' '}
+              Already have an account?{" "}
               <span onClick={() => setCurrentState("Log In")}>Login Here</span>
             </p>
           ) : (
             <p>
-              <span onClick={() => { setForgotMode(false); setResetStep(0); setResetError(""); setResetSuccess(""); }}> Back to Login</span>
+              <span
+                onClick={() => {
+                  setForgotMode(false);
+                  setResetStep(0);
+                  setResetError("");
+                  setResetSuccess("");
+                }}
+              >
+                {" "}
+                Back to Login
+              </span>
             </p>
           )}
         </form>
