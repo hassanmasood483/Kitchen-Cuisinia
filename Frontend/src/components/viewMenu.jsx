@@ -1,16 +1,27 @@
 import "../componentCSS/viewMenu.css";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { StoreContext } from "../context/StoreContext";
 import { assets } from "../assets/assets";
 
 const ViewMenu = () => {
   const navigate = useNavigate();
-  const { food_list, refreshFoodList } = useContext(StoreContext);
+  const { food_list, refreshFoodList, loading } = useContext(StoreContext);
+  const [menuLoading, setMenuLoading] = useState(true);
 
   // Refresh food list when component mounts
   useEffect(() => {
-    refreshFoodList();
+    const loadMenu = async () => {
+      setMenuLoading(true);
+      try {
+        await refreshFoodList();
+      } catch (error) {
+        console.error("Error loading menu:", error);
+      } finally {
+        setMenuLoading(false);
+      }
+    };
+    loadMenu();
   }, [refreshFoodList]);
 
   // Get unique categories from food_list
@@ -44,6 +55,43 @@ const ViewMenu = () => {
   const getCategoryInitial = (categoryName) => {
     return categoryName ? categoryName.charAt(0).toUpperCase() : '?';
   };
+
+  // Show loading state
+  if (loading || menuLoading) {
+    return (
+      <div className="menu-glass-bg">
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          height: '50vh',
+          fontSize: '18px'
+        }}>
+          Loading menu...
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state if no categories found
+  if (categories.length === 0) {
+    return (
+      <div className="menu-glass-bg">
+        <h1 className="menu-title">Top List</h1>
+        <p className="menu-subtitle">Our mainstay menu</p>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          height: '50vh',
+          fontSize: '18px',
+          color: '#666'
+        }}>
+          No menu items available at the moment.
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="menu-glass-bg">

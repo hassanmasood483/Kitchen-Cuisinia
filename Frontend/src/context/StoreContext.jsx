@@ -15,8 +15,18 @@ const StoreContextProvidor = (props) => {
 
   //Function to fetch data from database regarding food products, here we call the API for get all food product
   const fetchFoodList = async () => {
-    const response = await axios.get(url + "/food/food-list");
-    setFoodList(response.data.data);
+    try {
+      const response = await axios.get(url + "/food/food-list");
+      if (response.data.success) {
+        setFoodList(response.data.data);
+      } else {
+        console.error("Failed to fetch food list:", response.data.message);
+        setFoodList([]);
+      }
+    } catch (error) {
+      console.error("Error fetching food list:", error);
+      setFoodList([]);
+    }
   };
 
   // Function to refresh food list (can be called when new items are added)
@@ -28,13 +38,18 @@ const StoreContextProvidor = (props) => {
   useEffect(() => {
     async function loadData() {
       setLoading(true); // <-- Start loading
-      //We want that this function runs when web-page is load and data is fetch from database
-      await fetchFoodList();
-      if (localStorage.getItem("token")) {
-        setToken(localStorage.getItem("token"));
-        await loadCartData(localStorage.getItem("token")); //we call this function and get the token key with which we only get the data of that user's token
+      try {
+        //We want that this function runs when web-page is load and data is fetch from database
+        await fetchFoodList();
+        if (localStorage.getItem("token")) {
+          setToken(localStorage.getItem("token"));
+          await loadCartData(localStorage.getItem("token")); //we call this function and get the token key with which we only get the data of that user's token
+        }
+      } catch (error) {
+        console.error("Error loading initial data:", error);
+      } finally {
+        setLoading(false); // <-- End loading
       }
-      setLoading(false); // <-- End loading
     }
     loadData(); //here we call the function which fetch data
   }, []);
@@ -67,13 +82,23 @@ const StoreContextProvidor = (props) => {
 
   //we want that when user add some items in cart it will show whenever user visited application So,
   const loadCartData = async (token) => {
-    const response = await axios.post(
-      url + "/cart/get",
-      {},
-      { headers: { token } }
-    ); //we get one response in which we get the logged in user only data based on its token
+    try {
+      const response = await axios.post(
+        url + "/cart/get",
+        {},
+        { headers: { token } }
+      ); //we get one response in which we get the logged in user only data based on its token
 
-    setCartItems(response.data.cartData); // our cart data is loaded in this state, we want that this cart data is loaded whenever user is logged in that's why we call it in useEffect hook
+      if (response.data.success) {
+        setCartItems(response.data.cartData); // our cart data is loaded in this state, we want that this cart data is loaded whenever user is logged in that's why we call it in useEffect hook
+      } else {
+        console.error("Failed to load cart data:", response.data.message);
+        setCartItems({});
+      }
+    } catch (error) {
+      console.error("Error loading cart data:", error);
+      setCartItems({});
+    }
   };
 
   useEffect(() => {

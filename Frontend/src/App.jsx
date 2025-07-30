@@ -13,23 +13,39 @@ import CategoryPage from "./pages/CategoryPage";
 import Orders from "./pages/Orders";
 
 const App = () => {
-  const { token } = useContext(StoreContext);
+  const { token, loading } = useContext(StoreContext);
   const [showLogin, setShowLogin] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) {
+    // Show login if no token and not currently loading
+    if (!token && !loading) {
       setShowLogin(true);
-    } else {
+    } else if (token) {
       setShowLogin(false);
     }
-  }, [token, location]);
+  }, [token, loading]);
 
   // Intercept the View Menu button click on Home and navigate to /menu
   const handleViewMenuClick = () => {
     navigate("/menu");
   };
+
+  // Show loading spinner while context is loading
+  if (loading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh',
+        fontSize: '18px'
+      }}>
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <>
