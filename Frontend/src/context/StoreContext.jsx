@@ -3,6 +3,19 @@ import axios from "axios";
 
 const StoreContext = createContext(null);
 
+// Add a global axios response interceptor for 401 Unauthorized
+axios.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem("token");
+      // Optionally, you can also clear other user data here
+      window.location.reload(); // Force reload to show login
+    }
+    return Promise.reject(error);
+  }
+);
+
 const StoreContextProvidor = (props) => {
   const [cartItems, setCartItems] = useState({});
   const url = import.meta.env.VITE_API_URL || "http://localhost:3000";

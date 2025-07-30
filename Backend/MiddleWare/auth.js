@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const userModel = require("../Models/usermodel");
 
 // File to authenticate user token
 
@@ -11,9 +12,9 @@ const authMiddleWare = async (req, res, next) => {
   //check rather that token exists or not
 
   if (!token) {
-    return res.send({
+    return res.status(401).send({
       success: false,
-      message: "Not Authorized Login again",
+      message: "Not Authorized. Login again.",
     });
   }
 
@@ -21,14 +22,23 @@ const authMiddleWare = async (req, res, next) => {
   try {
     const token_decode = jwt.verify(token, process.env.JWT_SECRET);
 
+    // Check if user exists in the database
+    const user = await userModel.findById(token_decode.id);
+    if (!user) {
+      return res.status(401).send({
+        success: false,
+        message: "User not found. Please login again.",
+      });
+    }
+
     //During token creation we have user id, now we set that id in req.body
     req.body.userId = token_decode.id;
     next();
   } catch (error) {
     console.log(error);
-    res.send({
+    res.status(401).send({
       success: false,
-      message: "Error",
+      message: "Invalid or expired token. Please login again.",
     });
   }
 };
