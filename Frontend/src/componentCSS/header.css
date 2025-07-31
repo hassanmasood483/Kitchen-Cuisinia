@@ -78,33 +78,146 @@
   background-color: #2d3553;
 }
 
-/* Responsive Site */
-
-@media (max-width: 1050px) {
+/* Responsive Design */
+@media (max-width: 1200px) {
   .header-content {
     max-width: 90%;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
+  }
+  
+  .header-content h1 {
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  }
+  
+  .header-content p {
+    font-size: clamp(0.95rem, 1.4vw, 1.2rem);
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 1024px) {
   .header-content {
     max-width: 95%;
-    padding: 0 1rem;
+    padding: 0 1.2rem;
+    gap: 1.5rem;
   }
+  
+  .header-content h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+  
   .header-content p {
-    display: block;
+    font-size: clamp(0.9rem, 1.3vw, 1.1rem);
   }
+  
+  .header-content button {
+    padding: 0.9rem 2.2rem;
+    font-size: clamp(0.95rem, 1.1vw, 1rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 100vh;
+    min-height: 600px;
+  }
+  
+  .header-content {
+    max-width: 98%;
+    padding: 0 1rem;
+    gap: 1.2rem;
+  }
+  
+  .header-content h1 {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  }
+  
+  .header-content p {
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    line-height: 1.5;
+  }
+  
   .header-content button {
     padding: 0.8rem 2rem;
+    font-size: clamp(0.9rem, 1vw, 0.95rem);
+    margin-top: 0.8rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    min-height: 500px;
+  }
+  
+  .header-content {
+    padding: 0 0.8rem;
+    gap: 1rem;
+  }
+  
+  .header-content h1 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+  
+  .header-content p {
+    font-size: clamp(0.8rem, 1.1vw, 0.9rem);
+    line-height: 1.4;
+  }
+  
+  .header-content button {
+    padding: 0.7rem 1.8rem;
+    font-size: clamp(0.85rem, 0.95vw, 0.9rem);
+    margin-top: 0.6rem;
   }
 }
 
 @media (max-width: 480px) {
-  .header-content h1 {
-    font-size: clamp(2rem, 4vw, 2.5rem);
+  .header {
+    min-height: 450px;
   }
+  
+  .header-content {
+    padding: 0 0.6rem;
+    gap: 0.8rem;
+  }
+  
+  .header-content h1 {
+    font-size: clamp(1.4rem, 2.8vw, 1.8rem);
+  }
+  
   .header-content p {
-    font-size: clamp(0.9rem, 1.2vw, 1rem);
+    font-size: clamp(0.75rem, 1vw, 0.8rem);
+    line-height: 1.3;
+  }
+  
+  .header-content button {
+    padding: 0.6rem 1.5rem;
+    font-size: clamp(0.8rem, 0.9vw, 0.85rem);
+    margin-top: 0.5rem;
+    border-radius: 40px;
+  }
+}
+
+@media (max-width: 360px) {
+  .header {
+    min-height: 400px;
+  }
+  
+  .header-content {
+    padding: 0 0.4rem;
+    gap: 0.6rem;
+  }
+  
+  .header-content h1 {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  }
+  
+  .header-content p {
+    font-size: clamp(0.7rem, 0.9vw, 0.75rem);
+    line-height: 1.2;
+  }
+  
+  .header-content button {
+    padding: 0.5rem 1.2rem;
+    font-size: clamp(0.75rem, 0.85vw, 0.8rem);
+    margin-top: 0.4rem;
   }
 }

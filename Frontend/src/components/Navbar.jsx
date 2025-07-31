@@ -9,18 +9,16 @@ const Navbar = ({ setShowLogin }) => {
   const [isNavbarHidden, setIsNavbarHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false); // Hamburger menu state
   const location = useLocation();
 
-  // Check if we're on the home page
   const isHomePage = location.pathname === "/";
 
-  // Calculate total cart item count
   const cartCount = Object.values(cartItems).reduce(
     (sum, qty) => sum + (qty > 0 ? qty : 0),
     0
   );
 
-  //if user logged out navigate it through given route
   const navigate = useNavigate();
 
   const logout = () => {
@@ -34,46 +32,49 @@ const Navbar = ({ setShowLogin }) => {
     setShowProfileDropdown(!showProfileDropdown);
   };
 
-  // Handle scroll events
+  // Hamburger menu toggle
+  const toggleMobileMenu = () => {
+    setShowMobileMenu(!showMobileMenu);
+  };
+
   useEffect(() => {
     if (isHomePage) {
-      setIsNavbarHidden(false); // Always show navbar on home page
+      setIsNavbarHidden(false);
       return;
     }
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
       if (currentScrollY > 0) {
-        // Hide navbar on any scroll
         setIsNavbarHidden(true);
       } else {
-        // Show navbar when at top
         setIsNavbarHidden(false);
       }
-
       setLastScrollY(currentScrollY);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [lastScrollY, isHomePage]);
 
-  // Handle click outside to close dropdown
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (showProfileDropdown && !event.target.closest(".navbar-profile")) {
         setShowProfileDropdown(false);
       }
+      if (
+        showMobileMenu &&
+        !event.target.closest(".mobile-menu") &&
+        !event.target.closest(".hamburger-icon")
+      ) {
+        setShowMobileMenu(false);
+      }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [showProfileDropdown]);
+  }, [showProfileDropdown, showMobileMenu]);
 
   return (
     <>
@@ -88,6 +89,7 @@ const Navbar = ({ setShowLogin }) => {
           </Link>
           <span className="navbar-title">Kitchen Cuisinia</span>
         </div>
+        {/* Desktop NavLinks */}
         <div className="navbar-center">
           <NavLink to="/" className="nav-link" end>
             Home
@@ -138,8 +140,41 @@ const Navbar = ({ setShowLogin }) => {
               </ul>
             </div>
           )}
+          {/* Hamburger icon for mobile */}
+          <div className="hamburger-icon" onClick={toggleMobileMenu}>
+            <span />
+            <span />
+            <span />
+          </div>
         </div>
       </div>
+      {/* Mobile Menu */}
+      {showMobileMenu && (
+        <div className="mobile-menu">
+          <NavLink
+            to="/"
+            className="nav-link"
+            end
+            onClick={() => setShowMobileMenu(false)}
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/menu"
+            className="nav-link"
+            onClick={() => setShowMobileMenu(false)}
+          >
+            Menu
+          </NavLink>
+          <a
+            href="#footer"
+            className="nav-link"
+            onClick={() => setShowMobileMenu(false)}
+          >
+            Contact Us
+          </a>
+        </div>
+      )}
     </>
   );
 };

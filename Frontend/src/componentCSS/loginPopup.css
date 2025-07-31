@@ -207,20 +207,215 @@
   }
 }
 
-/* Responsive design */
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .login-container {
+    width: max(25vw, 350px);
+    padding: 22px 28px;
+    gap: 22px;
+  }
+  
+  .login-title h2 {
+    font-size: 22px;
+  }
+  
+  .login-field {
+    gap: 18px;
+  }
+  
+  .login-field input {
+    padding: 11px 15px;
+    font-size: 13px;
+  }
+  
+  .login-container button {
+    padding: 11px 15px;
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 768px) {
   .login-container {
     width: 90vw;
     max-width: 400px;
     padding: 20px 25px;
+    gap: 20px;
   }
   
   .login-title h2 {
     font-size: 20px;
   }
   
+  .login-field {
+    gap: 16px;
+  }
+  
   .login-field input {
     padding: 10px 14px;
+    font-size: 14px;
+  }
+  
+  .login-container button {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+  
+  .error-message {
+    font-size: 11px;
+  }
+  
+  .error-text, .success-text {
+    font-size: 12px;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-container {
+    width: 95vw;
+    max-width: 350px;
+    padding: 18px 22px;
+    gap: 18px;
+    border-radius: 12px;
+  }
+  
+  .login-title h2 {
+    font-size: 18px;
+  }
+  
+  .login-title img {
+    width: 14px;
+  }
+  
+  .login-field {
+    gap: 14px;
+  }
+  
+  .login-field input {
+    padding: 9px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+  
+  .login-container button {
+    padding: 9px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+  
+  .login-condition {
+    gap: 6px;
+    margin-top: -12px;
+  }
+  
+  .login-condition input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .login-popup p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    width: 98vw;
+    max-width: 320px;
+    padding: 16px 20px;
+    gap: 16px;
+    border-radius: 10px;
+  }
+  
+  .login-title h2 {
+    font-size: 16px;
+  }
+  
+  .login-title img {
+    width: 12px;
+  }
+  
+  .login-field {
+    gap: 12px;
+  }
+  
+  .login-field input {
+    padding: 8px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+  }
+  
+  .login-container button {
+    padding: 8px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+  }
+  
+  .error-message {
+    font-size: 10px;
+  }
+  
+  .error-text, .success-text {
+    font-size: 11px;
+    padding: 5px;
+  }
+  
+  .login-condition {
+    gap: 5px;
+    margin-top: -10px;
+  }
+  
+  .login-condition input[type="checkbox"] {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .login-popup p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .login-container {
+    width: 99vw;
+    max-width: 300px;
+    padding: 14px 18px;
+    gap: 14px;
+  }
+  
+  .login-title h2 {
+    font-size: 15px;
+  }
+  
+  .login-title img {
+    width: 11px;
+  }
+  
+  .login-field {
+    gap: 10px;
+  }
+  
+  .login-field input {
+    padding: 7px 9px;
+    font-size: 11px;
+  }
+  
+  .login-container button {
+    padding: 7px 9px;
+    font-size: 11px;
+  }
+  
+  .error-message {
+    font-size: 9px;
+  }
+  
+  .error-text, .success-text {
+    font-size: 10px;
+    padding: 4px;
+  }
+  
+  .login-popup p {
+    font-size: 11px;
   }
 }
 

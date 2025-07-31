@@ -213,13 +213,60 @@
   color: #6c757d;
 }
 
-@media (max-width: 768px) {
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .order-success {
+    padding: 1.5rem;
+  }
+  
   .success-container {
-    padding: 30px 20px;
+    max-width: 450px;
+  }
+}
+
+@media (max-width: 768px) {
+  .order-success {
+    padding: 1rem;
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+  
+  .success-container {
+    padding: 1.5rem 1rem;
+    max-width: 400px;
   }
   
   .success-container h1 {
-    font-size: 2rem;
+    font-size: 1.3rem;
+  }
+  
+  .order-id {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+  
+  .cod-info, .online-payment-info {
+    padding: 12px;
+  }
+  
+  .cod-info h2, .online-payment-info h2 {
+    font-size: 0.95rem;
+  }
+  
+  .cod-info p, .online-payment-info p {
+    font-size: 0.85rem;
+  }
+  
+  .delivery-info {
+    padding: 10px;
+  }
+  
+  .delivery-info h3 {
+    font-size: 0.9rem;
+  }
+  
+  .delivery-info li {
+    font-size: 0.8rem;
   }
   
   .action-buttons {
@@ -230,5 +277,159 @@
   .primary-btn, .secondary-btn {
     width: 100%;
     max-width: 250px;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .order-success {
+    padding: 0.75rem;
+  }
+  
+  .success-container {
+    padding: 1.2rem 0.8rem;
+    max-width: 350px;
+    border-radius: 12px;
+  }
+  
+  .success-icon {
+    font-size: 32px;
+  }
+  
+  .success-container h1 {
+    font-size: 1.2rem;
+  }
+  
+  .order-id {
+    font-size: 0.75rem;
+    padding: 5px 8px;
+  }
+  
+  .order-summary {
+    padding: 0.6rem;
+  }
+  
+  .order-info {
+    font-size: 0.85rem;
+  }
+  
+  .order-items li {
+    font-size: 0.8rem;
+  }
+  
+  .cod-info, .online-payment-info {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+  
+  .cod-info h2, .online-payment-info h2 {
+    font-size: 0.9rem;
+  }
+  
+  .cod-info p, .online-payment-info p {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+  }
+  
+  .delivery-info {
+    padding: 8px;
+  }
+  
+  .delivery-info h3 {
+    font-size: 0.85rem;
+  }
+  
+  .delivery-info li {
+    font-size: 0.75rem;
+    padding-left: 18px;
+  }
+  
+  .primary-btn, .secondary-btn {
+    padding: 9px 18px;
+    font-size: 0.9rem;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .order-success {
+    padding: 0.5rem;
+  }
+  
+  .success-container {
+    padding: 1rem 0.6rem;
+    max-width: 320px;
+    border-radius: 10px;
+  }
+  
+  .success-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  
+  .success-container h1 {
+    font-size: 1.1rem;
+  }
+  
+  .order-id {
+    font-size: 0.7rem;
+    padding: 4px 6px;
+  }
+  
+  .order-summary {
+    padding: 0.5rem;
+  }
+  
+  .order-info {
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+  }
+  
+  .order-items {
+    margin-top: 0.8rem;
+  }
+  
+  .order-items ul {
+    margin: 0.4rem 0 0 1rem;
+  }
+  
+  .order-items li {
+    font-size: 0.75rem;
+  }
+  
+  .cod-info, .online-payment-info {
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .cod-info h2, .online-payment-info h2 {
+    font-size: 0.85rem;
+  }
+  
+  .cod-info p, .online-payment-info p {
+    font-size: 0.75rem;
+  }
+  
+  .delivery-info {
+    padding: 6px;
+  }
+  
+  .delivery-info h3 {
+    font-size: 0.8rem;
+  }
+  
+  .delivery-info li {
+    font-size: 0.7rem;
+    padding-left: 16px;
+  }
+  
+  .action-buttons {
+    margin-top: 12px;
+  }
+  
+  .primary-btn, .secondary-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
   }
 } 
